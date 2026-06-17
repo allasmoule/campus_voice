@@ -1,92 +1,111 @@
 "use client";
 
 import { useMemo } from "react";
+import Image from "next/image";
 
 type AdFormat = "banner" | "rectangle" | "leaderboard";
 
 const bannerAds = [
   {
-    bg: "linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%)",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c476?w=1200&h=300&fit=crop",
     title: "Earn Your Degree Online",
-    desc: "Flexible programs from top universities. Start today.",
-    cta: "Apply Now",
-    ctaBg: "#f59e0b",
-    icon: "🎓",
+    desc: "Flexible programs from top universities — start your journey today.",
+    cta: "Apply Now →",
+    brand: "EduFlex University",
+    accent: "#2563eb",
   },
   {
-    bg: "linear-gradient(135deg, #065f46 0%, #059669 100%)",
-    title: "Scholarships Available",
-    desc: "$10,000+ awards for undergrad & grad students.",
-    cta: "Check Eligibility",
-    ctaBg: "#fbbf24",
-    icon: "💰",
+    image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&h=300&fit=crop",
+    title: "Scholarships Up to $25,000",
+    desc: "Merit & need-based awards for undergrad and graduate students.",
+    cta: "Check Eligibility →",
+    brand: "ScholarPath",
+    accent: "#059669",
   },
   {
-    bg: "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)",
-    title: "Study Abroad Programs",
-    desc: "Explore 200+ programs in 50 countries.",
-    cta: "Explore",
-    ctaBg: "#f97316",
-    icon: "✈️",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&h=300&fit=crop",
+    title: "Study Abroad This Summer",
+    desc: "200+ programs in 50 countries. Credits transfer seamlessly.",
+    cta: "Explore Programs →",
+    brand: "GlobalCampus",
+    accent: "#7c3aed",
   },
   {
-    bg: "linear-gradient(135deg, #dc2626 0%, #f87171 100%)",
-    title: "Campus Mental Health",
-    desc: "Free counseling resources for students & faculty.",
-    cta: "Get Support",
-    ctaBg: "#fbbf24",
-    icon: "❤️",
+    image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&h=300&fit=crop",
+    title: "Your Mental Health Matters",
+    desc: "Free 24/7 counseling & wellness resources for students.",
+    cta: "Get Support →",
+    brand: "CampusCare",
+    accent: "#dc2626",
   },
 ];
 
 const rectangleAds = [
   {
-    bg: "linear-gradient(180deg, #0f172a 0%, #1e3a5f 100%)",
-    title: "Master's in\nHigher Education",
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=500&fit=crop",
+    title: "Master's in Higher Education",
     subtitle: "100% Online · AACSB Accredited",
     cta: "Request Info",
-    ctaBg: "#2563eb",
-    logo: "🏛️ StateU Online",
+    brand: "StateU Online",
+    accent: "#1e40af",
   },
   {
-    bg: "linear-gradient(180deg, #1e1b4b 0%, #4338ca 100%)",
-    title: "Write Your\nDissertation Faster",
+    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=500&fit=crop",
+    title: "Write Your Dissertation Faster",
     subtitle: "AI-powered research tools for grad students",
     cta: "Try Free",
-    ctaBg: "#8b5cf6",
-    logo: "📚 ScholarAI",
+    brand: "ScholarAI",
+    accent: "#7c3aed",
   },
   {
-    bg: "linear-gradient(180deg, #14532d 0%, #15803d 100%)",
-    title: "Teach Online\nEarn More",
+    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=500&fit=crop",
+    title: "Teach Online, Earn More",
     subtitle: "Join 50,000+ instructors worldwide",
     cta: "Start Teaching",
-    ctaBg: "#eab308",
-    logo: "👩‍🏫 EduPlatform",
+    brand: "EduPlatform",
+    accent: "#059669",
   },
 ];
 
 function BannerAd({ ad }: { ad: (typeof bannerAds)[0] }) {
   return (
-    <div
-      className="w-full h-full rounded-lg flex items-center justify-between px-6 cursor-pointer hover:opacity-95 transition-opacity"
-      style={{ background: ad.bg }}
-    >
-      <div className="flex items-center gap-4">
-        <span className="text-3xl">{ad.icon}</span>
-        <div>
-          <div className="text-white font-bold text-sm">{ad.title}</div>
-          <div className="text-white/70 text-xs">{ad.desc}</div>
+    <div className="w-full h-full rounded-xl overflow-hidden cursor-pointer group relative">
+      <Image
+        src={ad.image}
+        alt={ad.title}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, 728px"
+        unoptimized
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      <div className="absolute inset-0 flex items-center px-6 sm:px-8">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-1">
+            <span
+              className="inline-block w-1.5 h-1.5 rounded-full"
+              style={{ backgroundColor: ad.accent }}
+            />
+            <span className="text-[10px] font-medium text-white/60 uppercase tracking-wider">
+              {ad.brand}
+            </span>
+          </div>
+          <div className="text-white font-bold text-base sm:text-lg leading-tight">
+            {ad.title}
+          </div>
+          <div className="text-white/60 text-xs mt-0.5 hidden sm:block">
+            {ad.desc}
+          </div>
         </div>
-      </div>
-      <div className="flex items-center gap-3">
-        <span
-          className="px-4 py-1.5 rounded-full text-xs font-bold text-gray-900 whitespace-nowrap"
-          style={{ backgroundColor: ad.ctaBg }}
-        >
-          {ad.cta}
-        </span>
-        <span className="text-[9px] text-white/40">Ad</span>
+        <div className="flex items-center gap-3 ml-4">
+          <span
+            className="px-4 py-2 rounded-lg text-xs font-semibold text-white whitespace-nowrap transition-all duration-200 group-hover:brightness-110"
+            style={{ backgroundColor: ad.accent }}
+          >
+            {ad.cta}
+          </span>
+          <span className="text-[9px] text-white/30 font-medium">Ad</span>
+        </div>
       </div>
     </div>
   );
@@ -94,28 +113,42 @@ function BannerAd({ ad }: { ad: (typeof bannerAds)[0] }) {
 
 function RectangleAd({ ad }: { ad: (typeof rectangleAds)[0] }) {
   return (
-    <div
-      className="w-full h-full rounded-lg flex flex-col items-center justify-center text-center px-6 cursor-pointer hover:opacity-95 transition-opacity"
-      style={{ background: ad.bg }}
-    >
-      <div className="text-[10px] text-white/50 mb-3">{ad.logo}</div>
-      <div className="text-white font-bold text-lg leading-tight whitespace-pre-line">{ad.title}</div>
-      <div className="text-white/60 text-xs mt-2">{ad.subtitle}</div>
-      <span
-        className="mt-4 px-5 py-2 rounded-full text-xs font-bold text-white"
-        style={{ backgroundColor: ad.ctaBg }}
-      >
-        {ad.cta}
+    <div className="w-full h-full rounded-xl overflow-hidden cursor-pointer group relative">
+      <Image
+        src={ad.image}
+        alt={ad.title}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="300px"
+        unoptimized
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-5 text-center">
+        <span className="text-[10px] font-medium text-white/50 uppercase tracking-wider">
+          {ad.brand}
+        </span>
+        <div className="text-white font-bold text-lg leading-tight mt-1">
+          {ad.title}
+        </div>
+        <div className="text-white/50 text-xs mt-1">{ad.subtitle}</div>
+        <span
+          className="inline-block mt-3 px-5 py-2 rounded-lg text-xs font-semibold text-white transition-all duration-200 group-hover:brightness-110"
+          style={{ backgroundColor: ad.accent }}
+        >
+          {ad.cta}
+        </span>
+      </div>
+      <span className="absolute top-2.5 right-3 text-[8px] text-white/30 font-medium">
+        Sponsored
       </span>
-      <span className="text-[8px] text-white/30 mt-3">Sponsored</span>
     </div>
   );
 }
 
 const formatStyles: Record<AdFormat, { width: string; height: string }> = {
-  banner: { width: "100%", height: "90px" },
-  rectangle: { width: "300px", height: "250px" },
-  leaderboard: { width: "100%", height: "90px" },
+  banner: { width: "100%", height: "100px" },
+  rectangle: { width: "300px", height: "280px" },
+  leaderboard: { width: "100%", height: "100px" },
 };
 
 export default function AdSlot({
@@ -139,8 +172,8 @@ export default function AdSlot({
   return (
     <div className={`flex justify-center ${className}`}>
       <div
-        className="relative overflow-hidden rounded-lg"
-        style={{ width: style.width, maxWidth: "100%", height: style.height }}
+        className="relative overflow-hidden rounded-xl shadow-sm"
+        style={{ width: style.width, maxWidth: "728px", height: style.height }}
         data-ad-slot={slot}
       >
         {format === "rectangle" ? (
