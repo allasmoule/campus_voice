@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CATEGORIES, INSTITUTION_TYPES, ROLES, ACADEMIC_AREAS } from "@/lib/constants";
+import AdSlot from "@/components/ads/AdSlot";
 
 export default function SubmitPage() {
   const [form, setForm] = useState({
@@ -72,6 +73,8 @@ export default function SubmitPage() {
         </ul>
       </div>
 
+      <AdSlot format="leaderboard" className="py-4" slot="submit-top" />
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <select required value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -130,6 +133,9 @@ export default function SubmitPage() {
           By submitting, you confirm this reflects your personal experience. No identifying data is collected.
         </p>
       </form>
+
+      <AdSlot format="rectangle" className="py-6" slot="submit-mid" />
+      <AdSlot format="banner" className="py-4" slot="submit-bottom" />
     </main>
   );
 }

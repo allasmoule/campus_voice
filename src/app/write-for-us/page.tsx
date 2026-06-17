@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 export const metadata = {
   title: "Write for Us",
@@ -12,6 +13,8 @@ export default function WriteForUsPage() {
       <p className="text-xl text-gray-600 mb-8">
         Your experience in higher education deserves to be heard. Here&apos;s how to contribute.
       </p>
+
+      <AdTop page="write" />
 
       <section className="space-y-8">
         <div>
@@ -36,6 +39,8 @@ export default function WriteForUsPage() {
           </div>
         </div>
 
+        <AdMid page="write" />
+
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Submission Process</h2>
           <ol className="space-y-3 text-gray-700">
@@ -56,6 +61,8 @@ export default function WriteForUsPage() {
           <p className="text-sm text-gray-500 mt-3">Completely anonymous. No login required.</p>
         </div>
       </section>
+
+      <AdBottom page="write" />
     </main>
   );
 }

@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ShareButtons from "@/components/ui/ShareButtons";
 import StoryCard from "@/components/stories/StoryCard";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -72,11 +73,15 @@ export default async function StoryPage({ params }: Props) {
           />
         )}
 
+        <AdTop page="story" />
+
         <article className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
           {story.content.split("\n").map((p, i) => (
             <p key={i}>{p}</p>
           ))}
         </article>
+
+        <AdMid page="story" />
 
         {/* Share again at bottom */}
         <div className="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between">
@@ -104,6 +109,8 @@ export default async function StoryPage({ params }: Props) {
             Share Your Story Anonymously
           </Link>
         </div>
+
+        <AdBottom page="story" />
       </main>
     </>
   );

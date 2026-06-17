@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 export const metadata = {
   title: "Resources",
@@ -45,8 +46,31 @@ export default function ResourcesPage() {
         If you or someone you know needs support, these organizations can help.
       </p>
 
+      <AdTop page="resources" />
+
       <div className="space-y-10">
-        {resources.map((group) => (
+        {resources.slice(0, 2).map((group) => (
+          <section key={group.category}>
+            <h2 className="text-xl font-bold text-gray-900 mb-4 border-b pb-2">{group.category}</h2>
+            <div className="space-y-4">
+              {group.items.map((item) => (
+                <div key={item.name} className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
+                  <h3 className="font-semibold text-gray-900">{item.name}</h3>
+                  <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-700 text-sm hover:underline mt-2 inline-block">
+                    Visit Resource →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <AdMid page="resources" />
+
+      <div className="space-y-10">
+        {resources.slice(2).map((group) => (
           <section key={group.category}>
             <h2 className="text-xl font-bold text-gray-900 mb-4 border-b pb-2">{group.category}</h2>
             <div className="space-y-4">
@@ -68,6 +92,8 @@ export default function ResourcesPage() {
         <strong>Disclaimer:</strong> TheCampusVoice is not a crisis service. If you are in immediate danger, please call 911 or your local emergency services.
         The resources listed here are provided for informational purposes and do not constitute endorsement.
       </div>
+
+      <AdBottom page="resources" />
     </main>
   );
 }

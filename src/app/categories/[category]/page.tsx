@@ -4,6 +4,7 @@ import StoryCard from "@/components/stories/StoryCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -40,6 +41,8 @@ export default async function CategoryPage({ params }: Props) {
         <p className="text-gray-600">{cat.description}</p>
       </div>
 
+      <AdTop page="category" />
+
       {stories.length === 0 ? (
         <div className="text-center py-16 text-gray-500">
           <p className="text-lg mb-4">No stories in this category yet.</p>
@@ -52,6 +55,9 @@ export default async function CategoryPage({ params }: Props) {
           ))}
         </div>
       )}
+
+      <AdMid page="category" />
+      <AdBottom page="category" />
     </main>
   );
 }

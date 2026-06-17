@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { INSTITUTION_TYPES, ROLES, ACADEMIC_AREAS } from "@/lib/constants";
 import LikertScale from "@/components/survey/LikertScale";
+import AdSlot from "@/components/ads/AdSlot";
 
 const STEPS = ["Context", "Respect & Safety", "Fairness & Power", "Belonging", "Climate", "Narrative", "Outcomes", "Reflection"];
 
@@ -93,6 +94,8 @@ export default function SurveyPage() {
         ))}
       </div>
       <p className="text-xs text-gray-500 mb-6">Step {step + 1} of {STEPS.length}: {STEPS[step]}</p>
+
+      <AdSlot format="leaderboard" className="py-3 mb-4" slot="survey-top" />
 
       {/* Step 0: Context */}
       {step === 0 && (
@@ -231,9 +234,13 @@ export default function SurveyPage() {
         <p className="text-red-600 text-sm mt-4 text-center">{message}</p>
       )}
 
+      <AdSlot format="rectangle" className="py-4" slot="survey-mid" />
+
       <p className="text-xs text-gray-400 text-center mt-6">
         This survey is completely anonymous. No identifying data is collected or stored.
       </p>
+
+      <AdSlot format="banner" className="py-4" slot="survey-bottom" />
     </main>
   );
 }

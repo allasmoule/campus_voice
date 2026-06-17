@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 export const metadata = {
   title: "Insights",
@@ -14,6 +15,8 @@ export default function InsightsPage() {
           Aggregated, anonymized data from campus experiences — powering research and driving institutional change.
         </p>
       </div>
+
+      <AdTop page="insights" />
 
       {/* Coming Soon Preview */}
       <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-12 text-center mb-12">
@@ -33,6 +36,8 @@ export default function InsightsPage() {
         </div>
       </div>
 
+      <AdMid page="insights" />
+
       {/* Preview Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {[
@@ -48,6 +53,8 @@ export default function InsightsPage() {
           </div>
         ))}
       </div>
+
+      <AdBottom page="insights" />
     </main>
   );
 }

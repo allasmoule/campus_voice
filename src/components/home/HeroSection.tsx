@@ -11,7 +11,7 @@ export default function HeroSection() {
             "url('https://images.unsplash.com/photo-1562774053-701939374585?w=1600&h=800&fit=crop')",
         }}
       />
-      {/* Left-heavy gradient: dark navy on left, fading to show campus on right */}
+      {/* Left-heavy gradient */}
       <div
         className="absolute inset-0"
         style={{
@@ -24,17 +24,33 @@ export default function HeroSection() {
         className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-14 sm:py-16 lg:py-20 flex items-center"
         style={{ minHeight: "440px" }}
       >
-        <div className="max-w-lg">
+        <div className="max-w-2xl">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-300 mb-5">
             Your Campus. Your Voice.
           </p>
-          <h1 className="text-[2.5rem] sm:text-[2.8rem] lg:text-[3.2rem] font-extrabold text-white leading-[1.08]">
+          <h1 className="text-[2.5rem] sm:text-[2.8rem] lg:text-[3.2rem] font-extrabold text-white leading-[1.12]">
             Real stories.
             <br />
-            Real students,{" "}
-            <span className="relative inline-block">
-              Real Professors.
-              <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-[#1D4ED8] rounded-full" />
+            <span className="whitespace-nowrap">
+              Real students, Real{" "}
+              <span className="relative inline-block">
+                Professors.
+                <svg
+                  className="absolute -bottom-1 left-0 w-full"
+                  height="8"
+                  viewBox="0 0 200 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M2 6C30 2 70 1 100 2.5C130 4 170 5 198 2"
+                    stroke="#3B82F6"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
             </span>
             <br />
             Real impact.
@@ -49,6 +65,31 @@ export default function HeroSection() {
           >
             Explore Stories
           </Link>
+        </div>
+
+        {/* Flag ribbon - right side */}
+        <div className="hidden lg:block absolute right-5 top-1/2 -translate-y-1/2">
+          <div className="relative">
+            {/* Ribbon body */}
+            <div className="bg-[#0c1a3a] border border-white/20 px-4 py-5 flex flex-col items-center gap-2 shadow-2xl"
+              style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 90%, 0 100%)",
+                paddingBottom: "28px",
+              }}
+            >
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/90 text-center leading-tight">
+                YOUR<br />VOICE.
+              </span>
+              <div className="w-6 h-px bg-white/30" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/90 text-center leading-tight">
+                YOUR<br />CAMPUS.
+              </span>
+              <div className="w-6 h-px bg-white/30" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/90 text-center leading-tight">
+                YOUR<br />FUTURE.
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

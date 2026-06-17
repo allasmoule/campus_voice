@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
 
 export const metadata = {
   title: "About",
@@ -7,8 +8,11 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
+    <>
     <main className="max-w-3xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold text-gray-900 mb-6">About TheCampusVoice</h1>
+
+      <AdTop page="about" />
 
       <section className="prose prose-lg max-w-none text-gray-700">
         <p className="text-xl text-gray-600 mb-8">
@@ -39,6 +43,8 @@ export default function AboutPage() {
           <li><strong>Legally Responsible:</strong> Built-in safeguards protect both contributors and the individuals they reference.</li>
         </ul>
 
+        <AdMid page="about" />
+
         <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Our Values</h2>
         <p>
           We believe in transparency, equity, and the power of narrative. Every feature of this platform
@@ -58,6 +64,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <AdBottom page="about" />
     </main>
+    </>
   );
 }
