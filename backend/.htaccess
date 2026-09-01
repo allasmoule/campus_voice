@@ -1,0 +1,14 @@
+# Only the actual public endpoints should ever be requested directly —
+# everything else here is a library file meant to be require_once'd, not
+# browsed to. Each one already self-guards in code too (defense in depth),
+# but this stops the request before PHP even runs.
+<FilesMatch "^(config|config\.local|db|helpers|media|placeholders|sanitize)\.php$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+Options -Indexes

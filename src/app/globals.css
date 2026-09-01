@@ -60,3 +60,103 @@ html {
 .animate-stagger > *:nth-child(4) { animation-delay: 300ms; }
 .animate-stagger > *:nth-child(5) { animation-delay: 400ms; }
 .animate-stagger > *:nth-child(6) { animation-delay: 500ms; }
+
+/* Tiptap Rich Text Editor & Prose Typography Styles */
+.ProseMirror,
+.prose {
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror ul,
+.prose ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.ProseMirror ol,
+.prose ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.ProseMirror li,
+.prose li {
+  display: list-item !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.ProseMirror li p,
+.prose li p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.ProseMirror blockquote,
+.prose blockquote {
+  border-left: 4px solid #3b82f6 !important;
+  padding-left: 1rem !important;
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.ProseMirror pre,
+.prose pre {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-family: monospace;
+  overflow-x: auto;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.ProseMirror code,
+.prose code {
+  background-color: #f3f4f6 !important;
+  color: #1f2937 !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.25rem !important;
+  font-family: monospace;
+  font-size: 0.875em;
+}
+
+.ProseMirror h2,
+.prose h2 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+  color: #111827;
+}
+
+.ProseMirror h3,
+.prose h3 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+  color: #1f2937;
+}
+
+.ProseMirror hr,
+.prose hr {
+  border-color: #e5e7eb !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}

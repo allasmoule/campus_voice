@@ -55,7 +55,7 @@ export default function SurveyPage() {
   const handleSubmit = async () => {
     setStatus("loading");
     try {
-      const res = await fetch("/api/survey", {
+      const res = await fetch("/backend/survey.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

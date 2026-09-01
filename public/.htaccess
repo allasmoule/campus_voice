@@ -1,0 +1,29 @@
+# Deployed as the site root's .htaccess (Next.js copies everything in
+# public/ into the exported out/ directory, which becomes public_html/).
+
+# Never serve dotfiles — .git, .env, .htpasswd, etc. — even if one is ever
+# accidentally uploaded alongside the static export.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} "!^/\.well-known/"
+RewriteRule "(^|/)\." - [F]
+
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Uncomment once your SSL certificate is confirmed active (cPanel → AutoSSL) —
+  # enabling this before HTTPS works correctly can make the site unreachable
+  # over plain HTTP for anyone who already has it cached.
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# A Content-Security-Policy is intentionally not set here yet: the "Custom
+# Code" ad type in admin/ads.php works by injecting an admin-pasted <script>
+# tag at runtime, which a script-src CSP strict enough to matter would also
+# block. Revisit this only alongside a redesign of that feature (e.g.
+# nonce-based injection), not by weakening it into something ineffective.

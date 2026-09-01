@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/utils";
 export default function StoryCard({ story }: { story: Story }) {
   return (
     <Link
-      href={`/stories/${story.slug}`}
+      href={`/stories/view?slug=${encodeURIComponent(story.slug)}`}
       className="group flex flex-col"
     >
       {/* Image — rounded corners matching mockup */}

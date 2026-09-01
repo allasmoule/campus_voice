@@ -26,9 +26,9 @@ export default function CategoryBar() {
   return (
     <section className="border-y border-gray-200 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
-        <div className="flex items-start justify-between animate-stagger">
+        <div className="flex items-start justify-start sm:justify-between gap-1 overflow-x-auto sm:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 animate-stagger [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {CATEGORIES.map((cat, i) => (
-            <div key={cat.slug} className="flex items-start">
+            <div key={cat.slug} className="flex items-start shrink-0">
               <Link
                 href={`/categories/${cat.slug}`}
                 className="flex flex-col items-center gap-1.5 py-2 px-4 group"

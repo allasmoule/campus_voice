@@ -3,19 +3,52 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { sampleStories } from "@/lib/sample-stories";
+import type { Story } from "@/types/story";
 
 export default function SearchModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [query, setQuery] = useState("");
+  const [allStories, setAllStories] = useState<Story[]>(sampleStories);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (open) {
       inputRef.current?.focus();
       document.body.style.overflow = "hidden";
+
+      let cancelled = false;
+      fetch("/backend/stories.php")
+        .then((res) => (res.ok ? res.json() : { stories: [] }))
+        .then((data) => {
+          if (cancelled || !data.stories || !Array.isArray(data.stories) || data.stories.length === 0) return;
+          const dbStories: Story[] = data.stories.map((s: any) => ({
+            id: String(s.id || s.slug),
+            title: s.title,
+            slug: s.slug,
+            excerpt: s.excerpt,
+            content: s.content,
+            category: s.category,
+            categoryColor: s.categoryColor || "#1D4ED8",
+            imageUrl: s.imageUrl || "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop",
+            readTime: Number(s.readTime) || 3,
+            createdAt: s.createdAt,
+            status: "PUBLISHED",
+          }));
+
+          const dbSlugs = new Set(dbStories.map((s) => s.slug));
+          const filteredSample = sampleStories.filter((s) => !dbSlugs.has(s.slug));
+          setAllStories([...dbStories, ...filteredSample]);
+        })
+        .catch(() => {});
+
+      return () => {
+        cancelled = true;
+      };
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   useEffect(() => {
@@ -26,15 +59,16 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  const results = query.trim().length > 1
-    ? sampleStories.filter(
-        (s) =>
-          s.status === "PUBLISHED" &&
-          (s.title.toLowerCase().includes(query.toLowerCase()) ||
-            s.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-            s.category.toLowerCase().includes(query.toLowerCase()))
-      )
-    : [];
+  const results =
+    query.trim().length > 1
+      ? allStories.filter(
+          (s) =>
+            s.status === "PUBLISHED" &&
+            (s.title.toLowerCase().includes(query.toLowerCase()) ||
+              s.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+              s.category.toLowerCase().includes(query.toLowerCase()))
+        )
+      : [];
 
   if (!open) return null;
 
@@ -68,12 +102,12 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
           )}
           {results.map((story) => (
             <Link
-              key={story.id}
-              href={`/stories/${story.slug}`}
+              key={story.id || story.slug}
+              href={`/stories/view?slug=${encodeURIComponent(story.slug)}`}
               onClick={onClose}
               className="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition-colors"
             >
-              <img src={story.imageUrl} alt="" className="w-12 h-12 rounded-lg object-cover shrink-0" />
+              <img src={story.imageUrl || "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop"} alt="" className="w-12 h-12 rounded-lg object-cover shrink-0" />
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-gray-900 truncate">{story.title}</p>
                 <p className="text-xs text-gray-500">{story.category} · {story.readTime} min read</p>

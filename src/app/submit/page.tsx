@@ -3,6 +3,17 @@
 import { useState } from "react";
 import { CATEGORIES, INSTITUTION_TYPES, ROLES, ACADEMIC_AREAS } from "@/lib/constants";
 import AdSlot from "@/components/ads/AdSlot";
+import RichTextEditor from "@/components/submission/RichTextEditor";
+import CoverImageUpload from "@/components/submission/CoverImageUpload";
+
+async function uploadImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("image", file);
+  const res = await fetch("/backend/upload-image.php", { method: "POST", body: formData });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Upload failed.");
+  return data.url as string;
+}
 
 export default function SubmitPage() {
   const [form, setForm] = useState({
@@ -12,18 +23,28 @@ export default function SubmitPage() {
     institutionType: "",
     academicArea: "",
   });
+  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "flagged" | "error">("idle");
   const [message, setMessage] = useState("");
   const [flags, setFlags] = useState<string[]>([]);
 
+  const plainTextLength = form.narrativeText.replace(/<[^>]*>/g, " ").trim().length;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (plainTextLength < 20) {
+      setStatus("error");
+      setMessage("Please share at least 20 characters describing your experience.");
+      return;
+    }
+
     setStatus("loading");
     try {
-      const res = await fetch("/api/submissions", {
+      const res = await fetch("/backend/submissions.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, coverImagePath: coverImageUrl }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -95,16 +116,16 @@ export default function SubmitPage() {
           </select>
         </div>
 
+        <CoverImageUpload imageUrl={coverImageUrl} onChange={setCoverImageUrl} onUpload={uploadImage} />
+
         <div>
-          <textarea
-            required
-            rows={8}
-            placeholder="Share your experience here... Use 'I felt...' language to describe your personal experience. Minimum 20 characters."
+          <RichTextEditor
             value={form.narrativeText}
-            onChange={(e) => setForm({ ...form, narrativeText: e.target.value })}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            onChange={(html) => setForm({ ...form, narrativeText: html })}
+            onImageUpload={uploadImage}
+            placeholder="Share your experience here... Use 'I felt...' language to describe your personal experience. Minimum 20 characters."
           />
-          <p className="text-xs text-gray-400 mt-1">{form.narrativeText.length} characters</p>
+          <p className="text-xs text-gray-400 mt-1">{plainTextLength} characters</p>
         </div>
 
         {status === "flagged" && (

@@ -25,7 +25,7 @@ export default function EditorsPicks() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Main featured story — takes 3 columns */}
-          <Link href={`/stories/${main.slug}`} className="lg:col-span-3 group">
+          <Link href={`/stories/view?slug=${encodeURIComponent(main.slug)}`} className="lg:col-span-3 group">
             <div className="relative overflow-hidden rounded-xl h-[340px]">
               <img
                 src={main.imageUrl}
@@ -48,7 +48,7 @@ export default function EditorsPicks() {
           {/* Side stories — takes 2 columns */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             {side.map((story) => (
-              <Link key={story.id} href={`/stories/${story.slug}`} className="group flex gap-4 items-start">
+              <Link key={story.id} href={`/stories/view?slug=${encodeURIComponent(story.slug)}`} className="group flex gap-4 items-start">
                 <img
                   src={story.imageUrl}
                   alt={story.title}

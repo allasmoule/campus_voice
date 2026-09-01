@@ -1,8 +1,7 @@
 import { sampleStories } from "@/lib/sample-stories";
-import StoryCard from "@/components/stories/StoryCard";
 import { CATEGORIES } from "@/lib/constants";
 import Link from "next/link";
-import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
+import AllStoriesClient from "@/components/stories/AllStoriesClient";
 
 export const metadata = {
   title: "Stories",
@@ -10,13 +9,11 @@ export const metadata = {
 };
 
 export default function StoriesPage() {
-  const stories = sampleStories.filter((s) => s.status === "PUBLISHED");
-  const firstHalf = stories.slice(0, Math.ceil(stories.length / 2));
-  const secondHalf = stories.slice(Math.ceil(stories.length / 2));
+  const initialStories = sampleStories.filter((s) => s.status === "PUBLISHED");
 
   return (
-    <>
-      <main className="max-w-7xl mx-auto px-4 py-12">
+    <main className="py-12">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">All Stories</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -42,29 +39,9 @@ export default function StoriesPage() {
             </Link>
           ))}
         </div>
-      </main>
-
-      <AdTop page="stories" />
-
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {firstHalf.map((story) => (
-            <StoryCard key={story.id} story={story} />
-          ))}
-        </div>
       </div>
 
-      <AdMid page="stories" />
-
-      <div className="max-w-7xl mx-auto px-4 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {secondHalf.map((story) => (
-            <StoryCard key={story.id} story={story} />
-          ))}
-        </div>
-      </div>
-
-      <AdBottom page="stories" />
-    </>
+      <AllStoriesClient initialSampleStories={initialStories} />
+    </main>
   );
 }

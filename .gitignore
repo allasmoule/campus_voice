@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# uploaded media (user-generated content, not source)
+/uploads/ads/*
+!/uploads/ads/.gitkeep
+/uploads/submissions/*
+!/uploads/submissions/.gitkeep
+/uploads/inquiries/*
+!/uploads/inquiries/.gitkeep
+
+# local PHP dev overrides — never deployed
+/backend/config.local.php
+/router.php
+
+# generated zip packages
+*.zip

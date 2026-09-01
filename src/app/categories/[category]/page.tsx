@@ -1,7 +1,6 @@
 import { sampleStories } from "@/lib/sample-stories";
 import { CATEGORIES } from "@/lib/constants";
-import StoryCard from "@/components/stories/StoryCard";
-import Link from "next/link";
+import CategoryStoriesClient from "@/components/categories/CategoryStoriesClient";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { AdTop, AdMid, AdBottom } from "@/components/ads/PageAds";
@@ -24,7 +23,7 @@ export default async function CategoryPage({ params }: Props) {
   const cat = CATEGORIES.find((c) => c.slug === category);
   if (!cat) notFound();
 
-  const stories = sampleStories.filter(
+  const initialStories = sampleStories.filter(
     (s) => s.status === "PUBLISHED" && s.category.toLowerCase().replace(/\s+/g, "-") === category
   );
 
@@ -43,18 +42,7 @@ export default async function CategoryPage({ params }: Props) {
 
       <AdTop page="category" />
 
-      {stories.length === 0 ? (
-        <div className="text-center py-16 text-gray-500">
-          <p className="text-lg mb-4">No stories in this category yet.</p>
-          <Link href="/submit" className="text-blue-700 hover:underline">Be the first to share →</Link>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {stories.map((story) => (
-            <StoryCard key={story.id} story={story} />
-          ))}
-        </div>
-      )}
+      <CategoryStoriesClient categorySlug={category} initialSampleStories={initialStories} />
 
       <AdMid page="category" />
       <AdBottom page="category" />

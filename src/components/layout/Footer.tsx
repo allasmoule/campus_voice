@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CATEGORIES, SOCIAL_LINKS } from "@/lib/constants";
+import AdvertiseContact from "./AdvertiseContact";
 
 export default function Footer() {
   return (
@@ -61,11 +62,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-gray-800 text-center">
+        <div className="mt-10 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
           <p className="text-xs text-gray-500">
             &copy; {new Date().getFullYear()} TheCampusVoice. All rights reserved.
             This platform collects personal experiences, not verified claims.
           </p>
+          <AdvertiseContact />
         </div>
       </div>
     </footer>

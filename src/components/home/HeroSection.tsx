@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden" style={{ minHeight: "440px" }}>
+    <section className="relative overflow-hidden min-h-[280px] sm:min-h-[440px]">
       {/* Full background campus image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -20,18 +20,15 @@ export default function HeroSection() {
         }}
       />
 
-      <div
-        className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-14 sm:py-16 lg:py-20 flex items-center"
-        style={{ minHeight: "440px" }}
-      >
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 py-6 sm:py-16 lg:py-20 flex items-center min-h-[280px] sm:min-h-[440px]">
         <div className="max-w-2xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-300 mb-5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-blue-300 mb-3 sm:mb-5">
             Your Campus. Your Voice.
           </p>
-          <h1 className="text-[2.5rem] sm:text-[2.8rem] lg:text-[3.2rem] font-extrabold text-white leading-[1.12]">
+          <h1 className="text-[1.5rem] xs:text-[1.75rem] sm:text-[2.6rem] lg:text-[3rem] font-extrabold text-white leading-[1.18]">
             Real stories.
             <br />
-            <span className="whitespace-nowrap">
+            <span className="whitespace-normal sm:whitespace-nowrap">
               Real students, Real{" "}
               <span className="relative inline-block">
                 Professors.
@@ -46,7 +43,7 @@ export default function HeroSection() {
                   <path
                     d="M2 6C30 2 70 1 100 2.5C130 4 170 5 198 2"
                     stroke="#3B82F6"
-                    strokeWidth="3"
+                    strokeWidth="3.5"
                     strokeLinecap="round"
                   />
                 </svg>
@@ -55,13 +52,13 @@ export default function HeroSection() {
             <br />
             Real impact.
           </h1>
-          <p className="mt-5 text-[14px] text-gray-300 max-w-sm leading-relaxed">
+          <p className="mt-3 sm:mt-5 text-[13px] sm:text-[14px] text-gray-300 max-w-sm leading-relaxed">
             TheCampusVoice is the go-to source for news, opinions, and stories
             that matter to college students.
           </p>
           <Link
             href="/stories"
-            className="mt-7 inline-flex items-center px-5 py-2.5 rounded-md bg-[#1D4ED8] text-white text-sm font-semibold hover:bg-[#1E40AF] transition-colors"
+            className="mt-4 sm:mt-7 inline-flex items-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-md bg-[#1D4ED8] text-white text-xs sm:text-sm font-semibold hover:bg-[#1E40AF] transition-colors"
           >
             Explore Stories
           </Link>

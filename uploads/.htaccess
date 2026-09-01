@@ -1,0 +1,9 @@
+# Defense in depth: the upload handler already only ever writes files with a
+# safe extension it derives itself from the validated MIME type (never from the
+# visitor-supplied filename), so nothing executable should ever land here — but
+# just in case, refuse to serve anything that looks like a script.
+<FilesMatch "\.(php|phtml|php[3-8]|pl|py|cgi|asp|aspx|sh|exe)$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes

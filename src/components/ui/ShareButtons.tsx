@@ -1,7 +1,7 @@
 "use client";
 
 export default function ShareButtons({ title, slug }: { title: string; slug: string }) {
-  const url = `https://thecampusvoice.com/stories/${slug}`;
+  const url = `https://thecampusvoice.info/stories/${slug}`;
   const text = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(url);
 
